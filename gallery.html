@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gallery - jesus perez</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    
+    <main class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="name">gallery</h1>
+            <nav class="nav">
+                <a href="index.html">home</a>
+                <a href="index.html#about">about</a>
+                <a href="index.html#work">work</a>
+            </nav>
+        </header>
+
+        <!-- Intro -->
+        <section class="gallery-intro">
+            <p>a visual archive. moments, snapshots, and anything i find cool.</p>
+            <p class="gallery-note">
+                <em>under construction :)</em>
+            </p>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-section">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Photos loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Photo Detail Modal -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content photo-modal">
+            <div id="photoDetail"></div>
+        </div>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>

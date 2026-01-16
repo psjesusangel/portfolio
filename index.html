@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesus Perez</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <main class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="name">jesus perez</h1>
+            <nav class="nav">
+                <a href="#about">about</a>
+                <a href="#work">work</a>
+                <a href="gallery.html">gallery</a>
+                <a href="resume.pdf" target="_blank" class="resume-link">resume ↓</a>
+            </nav>
+        </header>
+
+        <!-- Intro -->
+        <section class="intro">
+            <div class="intro-content">
+                <div class="intro-left">
+                    <div class="intro-header">
+                        <h2>welcome! right now I'm currently...</h2>
+                    </div>
+                    <p class="intro-text">
+                        a fourth-year cs @ yale. 
+                        based in the bay area / nhv. 
+                        building full-stack behavioral experiments @ <a href="https://levydecisionlab.org/"target="_blank">levy decision lab.</a>
+                        <br><br><br>
+                        interested in building software that <em>learns</em> from and <em>serves</em> the people who use it.
+                    </p>
+                </div>
+                <div class="intro-image">
+                    <img src="images/me_and_mocha.png" alt="Profile" id="profileImage">
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="about">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/yale_working.png" alt="Work at Yale" id="workingImage">
+                </div>
+                <div class="about-content">
+                    <h2>about me</h2>
+                    <br>
+                    <p>i'm most excited by software and projects that adapt to real users; 
+                        whether that's through building behavioral experiments that respond 
+                        to participant data, or creating interfaces that make people's lives easier.
+                        I work primarily with python for personal and cv/ml/data projects, 
+                        and javascript, node.js, express, and mongoDB for full-stack apps.
+                    </p>
+                    <br>
+                    <p>post graduation in may 2026, i'm looking to work on products with meaningful
+                        impact, focusing on accessibility, education, and developer tools. 
+                    </p>
+                    <br>
+                    <p>outside of school and work, i enjoy playing violin (classical and mariachi),
+                        running / hiking, cooking new recipes, playing with my dogs, and going to the beach!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="work">
+            <h2 class="section-title">projects / miscellaneous </h2>
+        
+            <!-- Filter Tags -->
+            <div class="work-filters">
+                <button class="filter-btn active" data-filter="all">all</button>
+                <button class="filter-btn" data-filter="software">software</button>
+                <button class="filter-btn" data-filter="data">data</button>
+                <button class="filter-btn" data-filter="writing">writing</button>
+            </div>
+        
+            <div class="carousel" id="carousel">
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Entries loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicator">
+                <span id="currentSlide">1</span>
+                <span class="indicator-divider"></span>
+                <span id="totalSlides">0</span>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact">
+            <h2>reach out!</h2>
+            <div class="contact-links">
+                <a href="mailto:psjesusangel@gmail.com?cc=jesus.perezsanchez@yale.edu" class="gmail-link"
+                    data-email="psjesusangel@gmail.com"><img src="images/mail_logo.png" alt="" class="contact-icon">email</a>
+                <a href="https://github.com/psjesusangel" target="_blank"><img src="images/github_logo.png" alt="" class="contact-icon">github</a>
+                <a href="https://linkedin.com/in/psjesusangel" target="_blank"><img src="images/linkedin_logo.png" alt="" class="contact-icon">linkedin</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 jesus perez</p>
+        </footer>
+    </main>
+
+    <!-- Entry Detail Modal -->
+    <div class="entry-detail-modal" id="entryDetailModal">
+        <div class="modal-content">
+            <button class="entry-detail-close" id="closeEntryDetail">×</button>
+            <div id="entryDetailContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
