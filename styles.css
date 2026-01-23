@@ -375,6 +375,7 @@ body {
     position: absolute;
     width: 60%;
     max-width: 700px;
+    height: 380px;
     padding: 3rem;
     border: var(--border);
     background: var(--bg);
@@ -384,6 +385,9 @@ body {
     opacity: 0;
     transform: translateX(0) scale(0.85);
     pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .carousel-item.hidden {
@@ -420,10 +424,17 @@ body {
 }
 
 
-.entry-type {
+.entry-tags {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.entry-type {
     font-family: var(--font-body);
     font-size: 0.75rem;
     font-weight: 600;
@@ -440,22 +451,38 @@ body {
     margin-bottom: 1rem;
     line-height: 1.2;
     font-weight: 700;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .entry-caption {
     font-style: italic;
     font-size: 1.25rem;
     color: var(--gray);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .entry-description {
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 2rem;
-    white-space: pre-wrap;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.entry-links {
+    margin-top: auto;
 }
 
 .entry-links {
@@ -547,6 +574,7 @@ body {
 
     .carousel-item {
         width: 85%;
+        height: 360px;
         padding: 2rem;
     }
 
@@ -779,6 +807,13 @@ body {
     color: var(--accent);
 }
 
+.entry-detail-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
 .entry-detail-type {
     font-family: var(--font-body);
     font-size: 0.7rem;
@@ -788,7 +823,6 @@ body {
     border: 2px solid var(--accent);
     padding: 0.25rem 0.75rem;
     display: inline-block;
-    margin-bottom: 2rem;
     letter-spacing: 0.05em;
 }
 
@@ -812,8 +846,45 @@ body {
     font-size: 1.15rem;
     line-height: 1.8;
     margin-bottom: 3rem;
-    white-space: pre-wrap;
     font-weight: 400;
+}
+
+.entry-detail-description img {
+    max-width: 100%;
+    height: auto;
+    border: var(--border);
+    margin: 1.5rem 0;
+    display: block;
+}
+
+.entry-detail-description h2,
+.entry-detail-description h3 {
+    font-family: var(--font-display);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.entry-detail-description h2 {
+    font-size: 1.5rem;
+}
+
+.entry-detail-description h3 {
+    font-size: 1.25rem;
+}
+
+.entry-detail-description p {
+    margin-bottom: 1rem;
+}
+
+.entry-detail-description ul,
+.entry-detail-description ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.entry-detail-description li {
+    margin-bottom: 0.5rem;
 }
 
 .entry-detail-links {

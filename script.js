@@ -1,83 +1,76 @@
-// Data Store
-class DataStore {
-    constructor() {
-        this.storageKey = 'jpPerezEntries';
-        this.initialize();
+// Portfolio Entries
+const entries = [
+    {
+        id: '1',
+        categories: ['data'],
+        title: 'Album Cover Genre Classification via Computer Vision',
+        caption: 'Is there something about album covers that can help us catalog them into genres?',
+        description: `This project uses computer vision and deep learning to classify album covers into 4 musical genres (HipHop, Rock, Pop, Electronic). I compared traditional CV features covered in lecture (color, edges, texture, faces) against a CNN achieving 40.42% test accuracy.`,
+        detailContent: '',
+        links: 'https://github.com/psjesusangel/album-genre-classification'
+    },
+    {
+        id: '2',
+        categories: ['data'],
+        title: 'Text-to-Image Pixel Art Generator',
+        caption: 'A text-to-image latent diffusion model for generating 16x16 pixel art sprites',
+        description: 'Developed a text-to-image generation system...',
+        detailContent: '',
+        links: 'https://github.com/psjesusangel/pixel-art-diffusion'
+    },
+    {
+        id: '3',
+        categories: ['software'],
+        title: 'Music Genre Particle Filter',
+        caption: 'Sequential Bayesian Inference for Music Genre Recognition',
+        description: `Humans recognize music genres incrementally: from initial uncertainty, distinctive musical features help us oscillate toward a certain genre. The temporal belief-updating suggests that there exists sequential probabilistic inference mechanisms.`,
+        detailContent: '',
+        links: 'https://github.com/psjesusangel/music-genre-particle-filter'
+    },
+    {
+        id: '4',
+        categories: ['software'],
+        title: 'Ari — Habit Tracker',
+        caption: 'Minimalist desktop habit tracking',
+        description: 'Built a desktop application inspired by Aristotle\'s quote: We are what we repeatedly do. Excellence, then, is not an act, but a habit...',
+        detailContent: '',
+        links: 'https://github.com/psjesusangel/ari'
+    },
+    {
+        id: '5',
+        categories: ['writing'],
+        title: 'From Cognitive Science to Code',
+        caption: 'My journey discovering software engineering',
+        description: `Started college thinking I wanted to study how the mind works...`,
+        detailContent: '',
+        links: ''
+    },
+    {
+        id: '6',
+        categories: ['data','writing'],
+        title: 'An Analysis of NYC\'s 2025 Mayoral Election',
+        caption: 'Using the election results and Census data, I test whether Mamdani\’s coalition is defined by class, education, race, or a combination of these factors.',
+        description: `Mamdani has assembled a coalition defying simple categorization, spanning educated
+        progressives, economically struggling communities, and multiracial urban neighborhoods. His
+        support combines economic distress, educational attainment, and diverse demographics rather
+        than any single factor. These findings show economic populism can build winning coalitions in
+        diverse cities when combined with progressive cultural messaging. For the Democratic Party, the
+        "moderate" versus "progressive" divide may be overstated—candidates appealing across
+        economic and racial lines may find substantial opportunities. Mamdani's campaign demonstrates
+        that democratic socialist politics can succeed in complex urban environments, a lesson that is
+        resonating far beyond New York.`,
+        detailContent: '',
+        links: 'https://github.com/psjesusangel/2025-nyc-mayoral-election-analysis/tree/main'
     }
+];
 
-    initialize() {
-        if (!localStorage.getItem(this.storageKey)) {
-            const sampleData = [
-            {
-                id: '1',
-                type: 'project',
-                category: 'software',
-                title: 'Ari — Habit Tracker',
-                caption: 'Minimalist desktop habit tracking with infinite canvas',
-                description: `Built a desktop application inspired by Aristote's quote: We are what we repeatedly do. Excellence, then, is not an act, but a habit...`,
-                links: 'https://github.com/psjesusangel/ari'
-            },
-            {
-                id: '2',
-                type: 'project',
-                category: 'data',
-                title: 'Text-to-Image Pixel Art Generator',
-                caption: 'PyTorch generative model with autoencoders and CLIP',
-                description: `Developed a text-to-image generation system...`,
-                links: 'https://github.com/psjesusangel/pixel-art-gen'
-            },
-            {
-                id: '3',
-                type: 'writing',
-                category: 'writing',
-                title: 'From Cognitive Science to Code',
-                caption: 'My journey discovering software engineering',
-                description: `Started college thinking I wanted to study how the mind works...`,
-                links: ''
-            }
-        ];
-            this.save(sampleData);
-        }
-    }
+// Category display names (internal value → button/tag label)
+const categoryLabels = {
+    software: 'swe',
+    data: 'ml/data',
+    writing: 'writing'
+};
 
-    getAll() {
-        const data = localStorage.getItem(this.storageKey);
-        return data ? JSON.parse(data) : [];
-    }
-
-    save(entries) {
-        localStorage.setItem(this.storageKey, JSON.stringify(entries));
-    }
-
-    add(entry) {
-        const entries = this.getAll();
-        entry.id = Date.now().toString();
-        entries.push(entry);
-        this.save(entries);
-        return entry;
-    }
-
-    update(id, updatedEntry) {
-        const entries = this.getAll();
-        const index = entries.findIndex(e => e.id === id);
-        if (index !== -1) {
-            entries[index] = { ...entries[index], ...updatedEntry };
-            this.save(entries);
-            return entries[index];
-        }
-        return null;
-    }
-
-    delete(id) {
-        const entries = this.getAll();
-        const filtered = entries.filter(e => e.id !== id);
-        this.save(filtered);
-        return filtered;
-    }
-}
-
-// Carousel
-// Carousel
 class Carousel {
     constructor() {
         this.track = document.getElementById('carouselTrack');
@@ -86,7 +79,7 @@ class Carousel {
         this.currentIndex = 0;
         this.entries = [];
         this.filteredEntries = [];
-        this.currentFilter = 'all';
+        this.activeFilters = new Set();
 
         // Touch gesture tracking
         this.touchStartX = 0;
@@ -113,12 +106,28 @@ class Carousel {
         this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
         this.track.addEventListener('touchend', () => this.handleTouchEnd());
 
-        // Filter buttons
+        // Filter buttons (multi-select toggle)
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                this.currentFilter = btn.dataset.filter;
+                const filter = btn.dataset.filter;
+                if (filter === 'all') {
+                    this.activeFilters.clear();
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                } else {
+                    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                        this.activeFilters.delete(filter);
+                        if (this.activeFilters.size === 0) {
+                            allBtn.classList.add('active');
+                        }
+                    } else {
+                        btn.classList.add('active');
+                        allBtn.classList.remove('active');
+                        this.activeFilters.add(filter);
+                    }
+                }
                 this.filterEntries();
             });
         });
@@ -156,10 +165,12 @@ class Carousel {
     }
 
     filterEntries() {
-        if (this.currentFilter === 'all') {
+        if (this.activeFilters.size === 0) {
             this.filteredEntries = this.entries;
         } else {
-            this.filteredEntries = this.entries.filter(e => e.category === this.currentFilter);
+            this.filteredEntries = this.entries.filter(e =>
+                [...this.activeFilters].some(f => e.categories.includes(f))
+            );
         }
         this.currentIndex = 0;
         this.render();
@@ -195,10 +206,12 @@ class Carousel {
         const links = entry.links ? entry.links.split(',').map(l => l.trim()).filter(l => l) : [];
 
         item.innerHTML = `
-            <span class="entry-type ${entry.category}">${entry.category}</span>
+            <div class="entry-tags">
+                ${entry.categories.map(cat => `<span class="entry-type ${cat}">${categoryLabels[cat] || cat}</span>`).join('')}
+            </div>
             <h3 class="entry-title">${entry.title}</h3>
             <p class="entry-caption">${entry.caption}</p>
-            <div class="entry-description">${this.truncateText(entry.description, 200)}</div>
+            <div class="entry-description">${entry.description}</div>
             ${links.length > 0 ? `
                 <div class="entry-links">
                     ${links.slice(0, 2).map(link => `
@@ -226,11 +239,6 @@ class Carousel {
         return item;
     }
 
-    truncateText(text, maxLength) {
-        if (text.length <= maxLength) return text;
-        return text.substr(0, maxLength) + '...';
-    }
-
     getLinkLabel(url) {
         if (url.includes('github')) return 'GitHub';
         if (url.includes('demo')) return 'Demo';
@@ -243,12 +251,15 @@ class Carousel {
         const content = document.getElementById('entryDetailContent');
 
         const links = entry.links ? entry.links.split(',').map(l => l.trim()).filter(l => l) : [];
+        const body = entry.detailContent || entry.description;
 
         content.innerHTML = `
-            <span class="entry-detail-type ${entry.category}">${entry.category}</span>
+            <div class="entry-detail-tags">
+                ${entry.categories.map(cat => `<span class="entry-detail-type ${cat}">${categoryLabels[cat] || cat}</span>`).join('')}
+            </div>
             <h1 class="entry-detail-title">${entry.title}</h1>
             <p class="entry-detail-caption">${entry.caption}</p>
-            <div class="entry-detail-description">${entry.description}</div>
+            <div class="entry-detail-description">${body}</div>
             ${links.length > 0 ? `
                 <div class="entry-detail-links">
                     ${links.map(link => `
@@ -283,6 +294,9 @@ class Carousel {
 
             if (index === this.currentIndex) {
                 item.classList.add('active');
+            } else if (total === 2) {
+                // With only 2 entries, show the other one to the right
+                item.classList.add('next');
             } else if (index === this.getPrevIndex()) {
                 item.classList.add('prev');
             } else if (index === this.getNextIndex()) {
@@ -307,11 +321,8 @@ class Carousel {
 }
 
 // Initialize
-const dataStore = new DataStore();
 const carousel = new Carousel();
-
-// Load initial data
-carousel.setEntries(dataStore.getAll());
+carousel.setEntries(entries);
 
 // Entry detail modal controls
 const entryDetailModal = document.getElementById('entryDetailModal');
