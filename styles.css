@@ -181,8 +181,7 @@ body {
 .about-image {
     width: 100%;
     max-width: 400px;
-    position: sticky;
-    top: 2rem;
+    position: relative;
 }
 
 .about-image img {
@@ -256,23 +255,6 @@ body {
     grid-template-columns: 1fr 1.5fr;
     gap: 4rem;
     align-items: start;
-}
-
-.about-image {
-    position: sticky;
-    top: 2rem;
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: var(--border);
-    transition: transform 0.3s;
-}
-
-.about-image img:hover {
-    transform: rotate(-2deg) scale(1.02);
 }
 
 .about-content h2 {
@@ -356,7 +338,7 @@ body {
     overflow: visible;
     width: 100%;
     position: relative;
-    height: 600px;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -375,7 +357,7 @@ body {
     position: absolute;
     width: 60%;
     max-width: 700px;
-    height: 380px;
+    height: 280px;
     padding: 3rem;
     border: var(--border);
     background: var(--bg);
@@ -465,17 +447,6 @@ body {
     font-weight: 400;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.entry-description {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-weight: 400;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
@@ -569,12 +540,12 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
     .carousel-viewport {
-        height: 500px;
+        height: 380px;
     }
 
     .carousel-item {
         width: 85%;
-        height: 360px;
+        height: 280px;
         padding: 2rem;
     }
 
@@ -931,20 +902,18 @@ body {
     transform-origin: left;
 }
 
-/* Animations on scroll */
-@keyframes fadeInUp {
+/* Animations on load */
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
 section {
-    animation: fadeInUp 0.8s ease backwards;
+    animation: fadeIn 0.8s ease backwards;
 }
 
 section:nth-child(1) { animation-delay: 0.1s; }

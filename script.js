@@ -211,7 +211,6 @@ class Carousel {
             </div>
             <h3 class="entry-title">${entry.title}</h3>
             <p class="entry-caption">${entry.caption}</p>
-            <div class="entry-description">${entry.description}</div>
             ${links.length > 0 ? `
                 <div class="entry-links">
                     ${links.slice(0, 2).map(link => `
