@@ -1,0 +1,19 @@
+<p>Using a dataset of album covers, I explored whether visual features could predict musical genre. The project compared two approaches: traditional computer vision features (color histograms, edge detection via Canny, Gabor texture filters, and face detection) against transfer learning with ResNet-18.</p>
+
+<h2>Traditional CV Pipeline</h2>
+<ul>
+    <li>Extracted color distributions using HSV histograms</li>
+    <li>Detected edges and visual complexity with Canny edge detection</li>
+    <li>Analyzed texture patterns using Gabor filters at multiple orientations</li>
+    <li>Identified human faces as a genre indicator</li>
+    <li>Combined features using an SVM classifier</li>
+</ul>
+
+<h2>Deep Learning Approach</h2>
+<ul>
+    <li>Fine-tuned a pre-trained ResNet-18 CNN on album cover images</li>
+    <li>Achieved 40.42% test accuracy across 4 genres</li>
+    <li>Demonstrated that learned features outperform hand-crafted ones</li>
+</ul>
+
+<p>The results showed that while traditional features capture some genre distinctions, deep learning's ability to learn hierarchical visual representations proved more effective for this classification task. The project highlighted the transition from manual feature engineering to learned representations in computer vision.</p>

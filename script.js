@@ -5,8 +5,8 @@ const entries = [
         categories: ['data'],
         title: 'Album Cover Genre Classification via Computer Vision',
         caption: 'Is there something about album covers that can help us catalog them into genres?',
-        description: `This project uses computer vision and deep learning to classify album covers into 4 musical genres (HipHop, Rock, Pop, Electronic). I compared traditional CV features covered in lecture (color, edges, texture, faces) against a CNN achieving 40.42% test accuracy.`,
-        detailContent: '',
+        description: 'This project uses computer vision and deep learning to classify album covers into 4 musical genres (HipHop, Rock, Pop, Electronic). I compared traditional CV features against a CNN achieving 40.42% test accuracy.',
+        contentFile: 'content/album-cover-classification.html',
         links: 'https://github.com/psjesusangel/album-genre-classification'
     },
     {
@@ -14,8 +14,8 @@ const entries = [
         categories: ['data'],
         title: 'Text-to-Image Pixel Art Generator',
         caption: 'A text-to-image latent diffusion model for generating 16x16 pixel art sprites',
-        description: 'Developed a text-to-image generation system...',
-        detailContent: '',
+        description: 'Developed a text-to-image generation system using latent diffusion models to create pixel art sprites from text descriptions.',
+        contentFile: 'content/pixel-art-diffusion.html',
         links: 'https://github.com/psjesusangel/pixel-art-diffusion'
     },
     {
@@ -23,8 +23,8 @@ const entries = [
         categories: ['software'],
         title: 'Music Genre Particle Filter',
         caption: 'Sequential Bayesian Inference for Music Genre Recognition',
-        description: `Humans recognize music genres incrementally: from initial uncertainty, distinctive musical features help us oscillate toward a certain genre. The temporal belief-updating suggests that there exists sequential probabilistic inference mechanisms.`,
-        detailContent: '',
+        description: 'Humans recognize music genres incrementally: from initial uncertainty, distinctive musical features help us oscillate toward a certain genre.',
+        contentFile: 'content/music-genre-particle-filter.html',
         links: 'https://github.com/psjesusangel/music-genre-particle-filter'
     },
     {
@@ -32,8 +32,8 @@ const entries = [
         categories: ['software'],
         title: 'Ari — Habit Tracker',
         caption: 'Minimalist desktop habit tracking',
-        description: 'Built a desktop application inspired by Aristotle\'s quote: We are what we repeatedly do. Excellence, then, is not an act, but a habit...',
-        detailContent: '',
+        description: 'Built a desktop application inspired by Aristotle\'s quote: We are what we repeatedly do. Excellence, then, is not an act, but a habit.',
+        contentFile: 'content/ari.html',
         links: 'https://github.com/psjesusangel/ari'
     },
     {
@@ -41,26 +41,36 @@ const entries = [
         categories: ['writing'],
         title: 'From Cognitive Science to Code',
         caption: 'My journey discovering software engineering',
-        description: `Started college thinking I wanted to study how the mind works...`,
-        detailContent: '',
+        description: 'Started college thinking I wanted to study how the mind works...',
+        contentFile: '',
         links: ''
     },
     {
         id: '6',
-        categories: ['data','writing'],
+        categories: ['data', 'writing'],
         title: 'An Analysis of NYC\'s 2025 Mayoral Election',
-        caption: 'Using the election results and Census data, I test whether Mamdani\’s coalition is defined by class, education, race, or a combination of these factors.',
-        description: `Mamdani has assembled a coalition defying simple categorization, spanning educated
-        progressives, economically struggling communities, and multiracial urban neighborhoods. His
-        support combines economic distress, educational attainment, and diverse demographics rather
-        than any single factor. These findings show economic populism can build winning coalitions in
-        diverse cities when combined with progressive cultural messaging. For the Democratic Party, the
-        "moderate" versus "progressive" divide may be overstated—candidates appealing across
-        economic and racial lines may find substantial opportunities. Mamdani's campaign demonstrates
-        that democratic socialist politics can succeed in complex urban environments, a lesson that is
-        resonating far beyond New York.`,
-        detailContent: '',
+        caption: 'Using the election results and Census data, I test whether Mamdani\'s coalition is defined by class, education, race, or a combination of these factors.',
+        description: 'Mamdani has assembled a coalition defying simple categorization, spanning educated progressives, economically struggling communities, and multiracial urban neighborhoods.',
+        contentFile: 'content/nyc-mayoral-election.html',
         links: 'https://github.com/psjesusangel/2025-nyc-mayoral-election-analysis/tree/main'
+    },
+    {
+        id: '7',
+        categories: ['software'],
+        title: 'Behavioral Psychology Experiments Platform',
+        caption: 'Full-stack web applications for research at Yale School of Medicine',
+        description: 'Built modular JavaScript-based behavioral experiments serving 500+ research participants at the Levy Neuro Decision Lab.',
+        contentFile: 'content/behavioral-experiments.html',
+        links: 'https://medicine.yale.edu/lab/levy/'
+    },
+    {
+        id: '8',
+        categories: ['data'],
+        title: 'Egalitarian Governance in DAOs',
+        caption: 'Identifying and analyzing decentralized autonomous organizations with one-person-one-vote systems',
+        description: 'Research project at Universidad Complutense de Madrid analyzing governance structures of 60+ DAOs to identify truly egalitarian voting mechanisms.',
+        contentFile: 'content/egalitarian-governance-daos.html',
+        links: ''
     }
 ];
 
@@ -240,17 +250,28 @@ class Carousel {
 
     getLinkLabel(url) {
         if (url.includes('github')) return 'GitHub';
+        if (url.includes('yale.edu')) return 'Lab';
         if (url.includes('demo')) return 'Demo';
         if (url.includes('docs')) return 'Docs';
         return 'Link';
     }
 
-    openEntryDetail(entry) {
+    async openEntryDetail(entry) {
         const modal = document.getElementById('entryDetailModal');
         const content = document.getElementById('entryDetailContent');
-
         const links = entry.links ? entry.links.split(',').map(l => l.trim()).filter(l => l) : [];
-        const body = entry.detailContent || entry.description;
+
+        let body = entry.description;
+        if (entry.contentFile) {
+            try {
+                const response = await fetch(entry.contentFile);
+                if (response.ok) {
+                    body = await response.text();
+                }
+            } catch (e) {
+                // Fall back to description
+            }
+        }
 
         content.innerHTML = `
             <div class="entry-detail-tags">

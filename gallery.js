@@ -14,10 +14,10 @@ const photos = [
         description: 'one of my highlights from visiting copenhagen, denmark was torvehallerne market! the fish and chips from this stand is one of the best meals i\'ve ever had!'
     },
     {
-        id: 'dogs',
-        src: 'images/gallery/dogs.jpeg',
-        caption: 'dogs',
-        description: 'meet mocha (right) and horchata (left), my two maltipoos! i woke them up for this photo -- i promise they\'re normally happier.'
+        id: 'californianebula',
+        src: 'images/gallery/californianebula.jpg',
+        caption: 'california nebula',
+        description: 'if you\'ve never listened to the shoegaze genre, i don\'t blame you. even as a long time fan of it, it can get a little stale and messy. that said, california nebula by chinese band 缺省 (default) is fantastic. no favorites here, just close your eyes and listen to the album in its entirety.'
     },
     {
         id: 'fornalutx',
@@ -30,6 +30,18 @@ const photos = [
         src: 'images/gallery/inrainbows.jpg',
         caption: 'in rainbows',
         description: 'radiohead\'s in rainbows is one of the best pieces of art i\'ve had the privilege of experiencing. if you\'ve never listened it, do it right now! weird fishes / arpeggi is my favorite song in the album.'
+    },
+        {
+        id: 'monterrey',
+        src: 'images/gallery/monterrey.jpeg',
+        caption: 'monterrey',
+        description: 'me in monterrey. i\'ve always enjoyed the ocean. whenever i\'m home for break, my girlfriend and i make it a point to visit monterrey, carmel, or santa cruz whenever we can. on this day, we were treated to surfers, otters, and seals.'
+    },
+        {
+        id: 'kylie',
+        src: 'images/gallery/kylie.jpeg',
+        caption: 'kylie',
+        description: 'lucky to say that this model is my girlfriend! when she\s not modeling or playing with her beloved cats, you can find her studying data science @ uc berkeley.'
     },
     {
         id: 'madrid',
@@ -44,12 +56,6 @@ const photos = [
         description: 'soller, mallorca was another beautiful town i visited on the island. the sunsets i got to see here will be forever burned into my memory. oh, and i got stung by a jellyfish here.'
     },
     {
-        id: 'monterrey',
-        src: 'images/gallery/monterrey.jpeg',
-        caption: 'monterrey',
-        description: 'me in monterrey. i\'ve always enjoyed the ocean. whenever i\'m home for break, my girlfriend and i make it a point to visit monterrey, carmel, or santa cruz whenever we can. on this day, we were treated to surfers, otters, and seals.'
-    },
-    {
         id: 'thegame',
         src: 'images/gallery/thegame.jpeg',
         caption: 'the game',
@@ -62,10 +68,10 @@ const photos = [
         description: 'the strokes has always been one of my favorite bands. i still remember being surprised with this gem in the middle of quarantine during my junior year of high school. if i had to choose, ode to the mets is my favorite song from the new abnormal album, though i love them all equally.'
     },
     {
-        id: 'californianebula',
-        src: 'images/gallery/californianebula.jpg',
-        caption: 'california nebula',
-        description: 'if you\'ve never listened to the shoegaze genre, i don\'t blame you. even as a long time fan of it, it can get a little stale and messy. that said, california nebula by chinese band 缺省 (default) is fantastic. no favorites here, just close your eyes and listen to the album in its entirety.'
+        id: 'dogs',
+        src: 'images/gallery/dogs.jpeg',
+        caption: 'dogs',
+        description: 'meet mocha (right) and horchata (left), my two maltipoos! i woke them up for this photo -- i promise they\'re normally happier.'
     }
 ];
 

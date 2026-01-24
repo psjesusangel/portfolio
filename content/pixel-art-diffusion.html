@@ -1,0 +1,18 @@
+<p>Built a specialized text-to-image generation system that produces 16x16 pixel art sprites from natural language descriptions. The project adapts latent diffusion model architectures for the unique constraints of pixel art generation.</p>
+
+<h2>Technical Implementation</h2>
+<ul>
+    <li>Implemented a latent diffusion model architecture optimized for low-resolution outputs</li>
+    <li>Trained on a curated dataset of pixel art sprites with text descriptions</li>
+    <li>Used CLIP embeddings for text conditioning to guide the generation process</li>
+    <li>Developed custom sampling strategies to maintain pixel art aesthetic qualities</li>
+</ul>
+
+<h2>Challenges &amp; Solutions</h2>
+<ul>
+    <li>Adapted diffusion models typically designed for high-resolution images to work effectively at 16x16 resolution</li>
+    <li>Balanced the tension between diffusion model smoothness and pixel art's discrete, sharp-edged style</li>
+    <li>Fine-tuned the noise schedule and sampling steps for coherent low-resolution generation</li>
+</ul>
+
+<p>The system demonstrates how modern generative AI techniques can be adapted for constrained, stylized output formats while maintaining controllability through text prompts.</p>

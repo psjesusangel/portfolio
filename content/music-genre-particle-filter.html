@@ -1,0 +1,19 @@
+<p>This project models music genre recognition as a sequential Bayesian inference problem using particle filtering. Just as humans gradually refine their genre predictions as a song progresses, the particle filter updates beliefs about genre membership over time as new audio features are observed.</p>
+
+<h2>Approach</h2>
+<ul>
+    <li>Implemented a bootstrap particle filter to track genre probability distributions</li>
+    <li>Extracted time-series audio features (spectral, rhythmic, timbral) as observations</li>
+    <li>Modeled genre transitions and observation likelihoods probabilistically</li>
+    <li>Tracked how confidence in genre predictions evolves throughout a song</li>
+</ul>
+
+<h2>Key Findings</h2>
+<ul>
+    <li>Early song segments (first 10-15 seconds) often contain highly discriminative features</li>
+    <li>Particle filter naturally captures uncertainty, showing when genre boundaries are ambiguous</li>
+    <li>The temporal evolution of beliefs mirrors human listening experience—initial uncertainty that resolves with distinctive musical cues</li>
+</ul>
+
+<h2>Cognitive Science Connection</h2>
+<p>The particle filter provides a computational framework for understanding incremental human perception. Rather than treating genre classification as a single snapshot decision, this sequential approach better reflects how humans actually process and categorize music in real-time.</p>
